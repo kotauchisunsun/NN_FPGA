@@ -38,7 +38,7 @@ def construct_neural_net(width,input_num,structure,output_num):
 if __name__=="__main__":
     mf = manager_factory()
 
-    width = 128
+    width = 16
 
-    #print construct_neural_net(width,2,2,2)
-    print construct_neural_net(width,320,[160,80,40,20],10)
+    print construct_neural_net(width,2,[2],2)
+    #print construct_neural_net(width,320,[160,80,40,20],10)

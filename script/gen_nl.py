@@ -2,6 +2,8 @@
 from itertools import chain
 
 def generate_neural_layer(name,width,input_num,unit_num,nn_module_name):
+    bias_num = unit_num
+
     nns = [
         "nn_unit%04d" % i
         for i
@@ -18,6 +20,18 @@ def generate_neural_layer(name,width,input_num,unit_num,nn_module_name):
         "input wire [width:1] %s;"%(v)
         for v
         in input_vals
+    )
+
+    bias_vals = [
+        "bias_%04d" % i
+        for i
+        in range(unit_num)
+    ]
+
+    bias_definition = "\n".join(
+        "input [width:1] %s;" % v
+        for v
+        in bias_vals
     )
 
     output_vals = [
@@ -76,7 +90,7 @@ def generate_neural_layer(name,width,input_num,unit_num,nn_module_name):
             nn_module_name,
             nns_name,
             ",".join(
-                input_vals + coeff_dict[nns_name] + [nn_output_vals[i]]
+                input_vals + coeff_dict[nns_name] + [bias_vals[i]] + [nn_output_vals[i]]
             )
         )  
         for i,nns_name
@@ -87,6 +101,7 @@ def generate_neural_layer(name,width,input_num,unit_num,nn_module_name):
 module {name}({params});
 parameter width = {width};
 {input_definition}
+{bias_definition}
 {coeff_definition}
 {output_definition}
 {nn_output_definition}
@@ -96,9 +111,10 @@ parameter width = {width};
 endmodule
 """.format(
     name = name,
-    params = ",".join(input_vals+coeff_vals+output_vals),
+    params = ",".join(input_vals+coeff_vals+bias_vals+output_vals),
     width = width,
     input_definition = input_definition,
+    bias_definition = bias_definition,
     coeff_definition = coeff_definition,
     output_definition = output_definition,
     nn_output_definition = nn_output_definition,

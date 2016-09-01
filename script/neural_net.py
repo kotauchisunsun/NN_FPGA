@@ -11,6 +11,7 @@ class neural_net(object):
 
         self.input_num = component1.input_num
         self.coefficient_num = component1.coefficient_num + component2.coefficient_num
+        self.bias_num = component1.bias_num + component2.bias_num
         self.output_num = component2.output_num
 
     def generate_source(self):
@@ -21,7 +22,9 @@ class neural_net(object):
             self.width,
             self.component1.input_num,
             self.component1.coefficient_num,
+            self.component1.bias_num,
             self.component2.input_num,
             self.component2.coefficient_num,
+            self.component2.bias_num,
             self.output_num
         )

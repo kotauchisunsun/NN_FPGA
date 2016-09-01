@@ -1,6 +1,6 @@
 module FIX_POINT_FLOAT_TEST;
 
-reg  [16:1] A,B;
+reg  [16:1] A,B,bias;
 wire [16:1] mul_out;
 
 MUL_FIX_POINT_FLOAT w ( A, B, mul_out ) ;

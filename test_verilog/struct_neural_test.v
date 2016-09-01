@@ -10,7 +10,11 @@ reg [16:1]
     c211,
     c212,
     c221,
-    c222;
+    c222,
+    b11,
+    b12,
+    b21,
+    b22;
 
 wire [16:1]
     out1,
@@ -27,6 +31,10 @@ STRUCT_NEURAL sn(
     c212,
     c221,
     c222,
+    b11,
+    b12,
+    b21,
+    b22,
     out1,
     out2
 );
@@ -38,7 +46,7 @@ initial begin
     $dumpfile("neural_test.vcd");
     $dumpvars(0,STRUCT_NEURAL_TEST);
     $monitor (
-        "%t: A = %04x , B = %04x , %04x %04x %04x %04x %04x %04x %04x %04x   %04x %04x",
+        "%t: A = %04x , B = %04x , %04x %04x %04x %04x %04x %04x %04x %04x %04x %04x %04x %04x  %04x %04x",
         $time,
         inputA,
         inputB,
@@ -50,9 +58,18 @@ initial begin
         c212,
         c221,
         c222,
+        b11,
+        b12,
+        b21,
+        b22,
         out1,
         out2
     );
+
+    b11=0;
+    b12=0;
+    b21=0;
+    b22=0;
     
         inputA=P0; inputB=P0; c111=P0; c112=P0; c121=P0; c122=P0; c211=P0; c212=P0; c221=P0; c222=P0;
      #1 inputA=P1; inputB=P1; c111=P1; c112=P1; c121=P1; c122=P1; c211=P1; c212=P1; c221=P1; c222=P1;

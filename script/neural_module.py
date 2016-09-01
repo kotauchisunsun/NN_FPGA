@@ -10,6 +10,7 @@ class neural_module(object):
 
         self.input_num = input_num
         self.coefficient_num = input_num
+        self.bias_num = 1
         self.output_num = 1
 
 
