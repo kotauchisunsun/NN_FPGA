@@ -10,6 +10,7 @@ class neural_layer(object):
         self.width = nm.width
 
         self.input_num = nm.input_num
+        self.bias_num = module_num
         self.coefficient_num = nm.coefficient_num * module_num
         self.output_num = nm.output_num * module_num
 

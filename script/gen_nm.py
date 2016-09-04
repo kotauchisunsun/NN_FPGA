@@ -18,17 +18,17 @@ def generate_neural(module_name,mul_func_name,width,input_num):
     ]
 
     return """
-module {module_name}({inputs},{coeffs},out);
+module {module_name}({inputs},{coeffs},bias,out);
 parameter width = {width};
 
-input [width:1] {inputs};
+input [width:1] {inputs},bias;
 input [width:1] {coeffs};
 output out;
 wire [width:1] {results};
 wire [width:1] add_result;
 
 {muls}
-assign add_result = {adds};
+assign add_result = {adds} + bias;
 
 assign out = add_result!=0 && ~add_result[width];
 
@@ -54,4 +54,4 @@ endmodule
 )
 
 if __name__=="__main__":
-    print generate_neural("CALC_NEURAL","MUL_FIX_POINT",16,2)
+    print generate_neural("CALC_NEURAL","MUL_FIX_POINT_FLOAT",16,2)

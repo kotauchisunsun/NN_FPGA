@@ -1,12 +1,11 @@
 #coding:utf-8
 from manager_factory import manager_factory
+import sys
 
 def construct_neural_net(width,input_num,structure,output_num):
     full_structure = [input_num] + structure + [output_num]   
     mf = manager_factory()
-    
-    nls = [
-        mf.nlm.get_module(
+    nls = [ mf.nlm.get_module(
             width,
             a,
             b
@@ -37,8 +36,9 @@ def construct_neural_net(width,input_num,structure,output_num):
 
 if __name__=="__main__":
     mf = manager_factory()
+    width = int(sys.argv[1])
+    input_num = int(sys.argv[2])
+    structure  = map(int,sys.argv[3].split(","))
+    output_num = int(sys.argv[4])
 
-    width = 128
-
-    #print construct_neural_net(width,2,2,2)
-    print construct_neural_net(width,320,[160,80,40,20],10)
+    print construct_neural_net(width,input_num,structure,output_num)
